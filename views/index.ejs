@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People List</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            animation: fadeIn 1s ease-in;
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 3em;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            animation: slideUp 1s ease-in-out;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.1);
+            font-weight: bold;
+            color: #fff;
+        }
+
+        td {
+            color: #f0f0f0;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            transform: scale(1.05);
+        }
+
+        .edit-btn {
+            background-color: #00c6ff;
+            color: #fff;
+        }
+
+        .delete-btn {
+            background-color: #ff416c;
+            color: #fff;
+        }
+
+        .add-btn {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            padding: 12px 24px;
+            font-size: 16px;
+            background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-btn:hover {
+            box-shadow: 0 0 20px #38f9d7;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media screen and (max-width: 600px) {
+            table, th, td {
+                font-size: 12px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>People List</h1>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Mobile</th>
+                <th>Actions</th>
+            </tr>
+            <% people.forEach(person => { %>
+                <tr>
+                    <td><%= person.name %></td>
+                    <td><%= person.age %></td>
+                    <td><%= person.gender %></td>
+                    <td><%= person.mobile %></td>
+                    <td>
+                        <a class="edit-btn" href="/person/edit/<%= person._id %>">Edit</a>
+                        <a class="delete-btn" href="/person/delete/<%= person._id %>">Delete</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </table>
+        <a class="add-btn" href="/person/new">➕ Add New Person</a>
+    </div>
+</body>
+</html>
