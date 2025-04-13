@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Person</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #00c9ff, #92fe9d);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            animation: fadeIn 1s ease;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 80px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            animation: slideUp 1s ease;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin: 12px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .radio-group {
+            margin-bottom: 10px;
+        }
+
+        .radio-group label {
+            display: inline-block;
+            margin-right: 20px;
+            font-weight: normal;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #43e97b, #38f9d7);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            box-shadow: 0 0 15px #38f9d7;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add New Person</h2>
+        <form action="/person" method="POST" onsubmit="return validateForm()">
+            <label for="name">Name:</label>
+            <input type="text" name="name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" required>
+
+            <label for="gender">Gender:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="male" required> Male</label>
+                <label><input type="radio" name="gender" value="female" required> Female</label>
+                <label><input type="radio" name="gender" value="prefer not to say" required> Prefer not to say</label>
+            </div>
+
+            <label for="mobile">Mobile:</label>
+            <input type="text" name="mobile" required maxlength="10" pattern="\d{10}" title="Phone number must be 10 digits.">
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            const phone = document.querySelector('input[name="mobile"]');
+            const phonePattern = /^\d{10}$/;
+            if (!phonePattern.test(phone.value)) {
+                alert('Please enter a valid 10-digit phone number.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
